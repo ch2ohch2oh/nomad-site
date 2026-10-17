@@ -51,6 +51,12 @@ const updateReadingPosition = () => {
     const bounds = frenchDraw.getBoundingClientRect();
     if (bounds.top <= 160 && bounds.bottom > 160) currentId = 'french-draw';
   }
+  if (currentId === 'talent-options') {
+    for (const child of document.querySelectorAll('[data-toc-child]')) {
+      const bounds = child.getBoundingClientRect();
+      if (bounds.top <= 160 && bounds.bottom > 160) currentId = child.id;
+    }
+  }
   tocLinks.forEach(link => {
     const active = link.hash === `#${currentId}`;
     if (active) link.setAttribute('aria-current', 'location');
