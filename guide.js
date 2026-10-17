@@ -40,7 +40,12 @@ const updateReadingPosition = () => {
     if (target.getBoundingClientRect().top <= 160) current = target;
   }
   if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) current = targets.at(-1);
-  const currentId = current.id === 'further-reading' && document.getElementById('glossary').getBoundingClientRect().top <= 160 ? 'glossary' : current.id;
+  let currentId = current.id === 'further-reading' && document.getElementById('glossary').getBoundingClientRect().top <= 160 ? 'glossary' : current.id;
+  const scoring = document.getElementById('ee-scoring');
+  if (currentId === 'pr-options' && scoring) {
+    const bounds = scoring.getBoundingClientRect();
+    if (bounds.top <= 160 && bounds.bottom > 160) currentId = 'ee-scoring';
+  }
   tocLinks.forEach(link => {
     const active = link.hash === `#${currentId}`;
     if (active) link.setAttribute('aria-current', 'location');
