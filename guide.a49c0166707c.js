@@ -46,6 +46,11 @@ const updateReadingPosition = () => {
     const bounds = scoring.getBoundingClientRect();
     if (bounds.top <= 160 && bounds.bottom > 160) currentId = 'ee-scoring';
   }
+  const frenchDraw = document.getElementById('french-draw');
+  if (currentId === 'ee-scoring' && frenchDraw) {
+    const bounds = frenchDraw.getBoundingClientRect();
+    if (bounds.top <= 160 && bounds.bottom > 160) currentId = 'french-draw';
+  }
   tocLinks.forEach(link => {
     const active = link.hash === `#${currentId}`;
     if (active) link.setAttribute('aria-current', 'location');
